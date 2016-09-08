@@ -14,7 +14,7 @@ def mapper():
             continue
 
         ip, clientID, user, time1, time2, request, path, protocol, status, return_size = data
-        print "{0}\t{1}".format(request)
+        print "{0}\t{1}".format(path.replace('http://www.the-associates.co.uk', ''))
 
 def main():
     import StringIO

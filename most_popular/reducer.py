@@ -16,13 +16,14 @@ def reducer():
 
         if data is None:
             continue
-        thisKey = data.replace('http://www.the-associates.co.uk', '')
+        #thisKey = data.replace('http://www.the-associates.co.uk', '')
+        thisKey = data
 
         if oldKey and oldKey != thisKey:
             if hitsMax < hitsTotal:
                 hitsMax = hitsTotal
-                pathMax = thisKey
-            hitesTotal = 0
+                pathMax = oldKey
+            hitsTotal = 0
 
         oldKey = thisKey
         hitsTotal += 1

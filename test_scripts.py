@@ -40,12 +40,15 @@ def reducer2(paths):
         if data is None:
             continue
         thisKey = data.replace('http://www.the-associates.co.uk', '')
+        print 'thisKey: ' + thisKey
 
         if oldKey and oldKey != thisKey:
-            if hitsMax < hitsTotal:
+            print "oldKey: " + oldKey + "\t hitsTotal: " + str(hitsTotal)
+            if hitsMax < int(hitsTotal):
                 hitsMax = hitsTotal
-                pathMax = thisKey
-            hitesTotal = 0
+                pathMax = oldKey
+            hitsTotal = 0
+            print "pathMax: " + pathMax + "\t hitsMax: " + str(hitsMax)
 
         oldKey = thisKey
         hitsTotal += 1
@@ -54,13 +57,13 @@ def reducer2(paths):
     print "{0}\t{1}".format(pathMax, hitsMax)
 
 paths = [
+        '/13.223.157.186',
         'http://www.the-associates.co.uk/15.223.157.186',
-        '13.223.157.186',
-        '15.223.157.186',
-        'http://www.the-associates.co.uk16.223.157.186',
+        '/15.223.157.186',
+        'http://www.the-associates.co.uk/16.223.157.186',
         'http://www.the-associates.co.uk/17.223.157.186',
-        'http://www.the-associates.co.uk17.223.157.186',
-        '17.223.157.186',
-        '18.223.157.186']
+        'http://www.the-associates.co.uk/17.223.157.186',
+        '/17.223.157.186',
+        '/18.223.157.186']
 
 print reducer2(paths)
