@@ -6,7 +6,7 @@
 
 def reducer():
 
-    maxSale = 0
+    maxSale = 0.0
     oldKey = None
 
     for line in sys.stdin:
@@ -18,16 +18,23 @@ def reducer():
         thisKey, thisSale = data
         thisSale = float(thisSale)
 
-
-        if maxSale < thisSale:
-            maxSale = thisSale
-
-        if oldKey and oldKey != thisKey:
-            if oldKey != None:
+        if oldKey:
+            if oldKey != thisKey:
                 print "{0}\t{1}".format(oldKey, maxSale)
-            maxSale = 0
-
-        oldKey = thisKey
+                maxSale = thisSale
+                oldKey = thisKey
+            else:
+                if maxSale < thisSale:
+                    maxSale = thisSale
+        else:
+            maxSale = thisSale
+            oldKey = thisKey
 
     if oldKey != None:
         print "{0}\t{1}".format(oldKey, maxSale)
+
+
+
+
+
+

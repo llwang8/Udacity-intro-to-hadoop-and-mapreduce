@@ -44,7 +44,7 @@ def reducer2(paths):
 
         if oldKey and oldKey != thisKey:
             print "oldKey: " + oldKey + "\t hitsTotal: " + str(hitsTotal)
-            if hitsMax < int(hitsTotal):
+            if hitsMax < hitsTotal:
                 hitsMax = hitsTotal
                 pathMax = oldKey
             hitsTotal = 0
@@ -67,3 +67,5 @@ paths = [
         '/18.223.157.186']
 
 print reducer2(paths)
+
+
