@@ -6,6 +6,7 @@
 
 import sys
 import re
+import string
 
 def mapper():
     for line in sys.stdin:
@@ -15,7 +16,8 @@ def mapper():
             continue
 
         nid, title, tagnames, author_id, body, node_type, parent_id, abs_parent_id, added_at, score, state_str, last_edited_id, last_act_by_id, last_act_at, active_rev_id, extra, extra_ref_id, extra_count, marked = data
-        print "{0}\t{1}".format(nid, body)
+        if nid != '"id"':  #get rid of title row
+            print "{0}\t{1}".format(nid, body)
 
 
 def reducer():
@@ -24,16 +26,22 @@ def reducer():
     for line in sys.stdin:
         data_mapped = line.strip().split('\t')
 
+
         if len(data_mapped) != 2:
             continue
 
         nid, body = data_mapped
-        wordlist =  re.split(r'[.,!?:;"()<>[]#$=-/\s"]\s*', body)
+
+        nid = int(string.replace(nid, '"', '', 2)) #take out nodeid double quotes and change it to int
+
+        cleanr = re.compile('<.*?>')
+        body = re.sub(cleanr, '' , body)  #take out html tags
+        wordlist =  re.split(r'[.,!?:;\"()<>\[\]#$=\-/\s"]\s*', body) #multiple dilimenators
 
         for word in wordlist:
-            if wordlib[word] is None:
-                wordlib[word] = []
-            wordlib[word].append(nid)
+            nodelist = wordlib.get(word, []) #add default []
+            nodelist.append(nid)
+            wordlib[word] = sorted(nodelist) #sort nodelist ascending
 
     for key in wordlib:
         print "{0}\t{1}".format(key, wordlib[key])
