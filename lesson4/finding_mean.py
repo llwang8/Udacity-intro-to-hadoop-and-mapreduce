@@ -14,7 +14,8 @@ def mapper():
             continue
 
         date, time, store, item, cost, payment = data
-        print "{0}\t{1}".format(date, cost)
+        weekday = datetime.strptime(date, "%y-%m-%d").weekday()
+        print "{0}\t{1}".format(weekday, cost)
 
 
 
@@ -27,8 +28,7 @@ def reducer():
         if len(data_mapped) != 2:
             continue
 
-        date, sales = data_mapped
-        weekday = datetime.strptime(date, "%y-%m-%d").weekday()
+        weekday, sales = data_mapped
         sales = float(sales)
 
         sales_summary = sales_by_weekday.get(weekday, {'sum': 0, 'count': 0})

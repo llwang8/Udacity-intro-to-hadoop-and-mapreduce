@@ -32,21 +32,24 @@ def reducer():
 
         nid, body = data_mapped
 
-        nid = int(string.replace(nid, '"', '', 2)) #take out nodeid double quotes and change it to int
+        nid = int(string.replace(nid, '"', '', 2)) #take out node_id double quotes and change it to int
 
         cleanr = re.compile('<.*?>')
-        body = re.sub(cleanr, '' , body)  #take out html tags
+        body = re.sub(cleanr, ' ' , body)  #take out html tags
         wordlist =  re.split(r'[.,!?:;\"()<>\[\]#$=\-/\s"]\s*', body) #multiple dilimenators
 
         for word in wordlist:
-            nodelist = wordlib.get(word, []) #add default []
-            nodelist.append(nid)
-            wordlib[word] = sorted(nodelist) #sort nodelist ascending
+            word = word.lower()
+            if word == 'fantastic' or word == 'fantastically':
+                nodelist = wordlib.get(word, []) #add default [] if not exist
+                nodelist.append(nid)
+                wordlib[word] = sorted(nodelist) #sort nodelist ascending
 
     for key in wordlib:
         print "{0}\t{1}".format(key, wordlib[key])
+        print len(wordlib[key])
 
-    print 'fantastic' + '\t' + wordlib['fantastic']
+    #print 'fantastic' + '\t' + wordlib['fantastic']
 
 
 
