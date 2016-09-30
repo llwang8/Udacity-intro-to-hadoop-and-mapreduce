@@ -31,6 +31,8 @@ def reducer():
         data_mapped = line.strip().split(',')
         if oldKey is None or oldKey != data_mapped[0]:
             oldKey = data_mapped[0]
+            user = []
+            forum = []
 
         if len(data_mapped) == 6:
             user = data_mapped

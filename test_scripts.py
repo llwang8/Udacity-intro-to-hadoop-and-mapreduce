@@ -140,6 +140,8 @@ def reducer(datalist):
         #print data_mapped
         if oldKey is None or oldKey != data_mapped[0]:
             oldKey = data_mapped[0]
+            user = []
+            forum = []
 
         if len(data_mapped) == 6:
             user = data_mapped
@@ -150,12 +152,15 @@ def reducer(datalist):
         else:
             continue
 
-    if user and forum:
-        print forum[2:] + user[2:]
+        if user and forum:
+            print forum[2:] + user[2:]
 
 
 stringList = ['12345\t11\t3\t4\t1',
-'6336\tUnit 1: Same Value Q\tcs101 value same\t12345\tquestion\t\N\t\N\t2012-02-25 08:09:06.787181+00\t1']
+'6336\tUnit 1: Same Value Q\tcs101 value same\t12345\tquestion\t\N\t\N\t2012-02-25 08:09:06.787181+00\t1',
+'12346\t12\t3\t4\t1',
+'6336\tUnit 2: Same Value Q\tcs101 value same\t12346\tquestion\t\N\t\N\t2012-02-25 08:09:06.787181+00\t1'
+]
 
 print mapper(stringList)
 
