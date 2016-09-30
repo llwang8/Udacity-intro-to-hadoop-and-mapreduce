@@ -15,7 +15,7 @@ def mapper():
             continue
 
         date, time, store, item, cost, payment = data
-        weekday = datetime.strptime(date, "%y-%m-%d").weekday()
+        weekday = datetime.strptime(date, "%Y-%m-%d").weekday()
         print "{0}\t{1}".format(weekday, cost)
 
 
